@@ -1,0 +1,61 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1,
+    "analysis": {
+      "normalizer": {
+        "lowercase_normalizer": {
+          "type": "custom",
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      },
+      "analyzer": {
+        "tokenized_lowercase_analyzer": {
+          "type": "standard",
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "age": {
+        "type": "long"
+      },
+      "name": {
+        "type": "keyword",
+        "normalizer": "lowercase_normalizer"
+      },
+      "dob": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+      },
+      "email": {
+        "type": "keyword",
+        "normalizer": "lowercase_normalizer"
+      },
+      "addresses": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "text"
+          },
+          "city": {
+            "type": "keyword",
+            "normalizer": "lowercase_normalizer"
+          },
+          "state": {
+            "type": "keyword",
+            "normalizer": "lowercase_normalizer"
+          }
+        }
+      }
+    }
+  }
+}
